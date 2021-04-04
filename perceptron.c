@@ -6,10 +6,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <string.h>
 //prototipos
 void traco();
 void limpa();
+char *toLower(char *str);
 
 int main(int argc, char const *argv[])
 {
@@ -96,9 +98,23 @@ void traco()
 
 void limpa()
 {
-    const char *s = strlwr(getenv("OS"));
-    if (strncmp(s, "win", 3) == 0)
-        system("cls");
+    const char *s = getenv("OS");
+    if (s != NULL)
+    {
+        if (strncmp(s, "win", 3) == 0)
+            system("cls");
+        else
+            system("clear");
+    }
     else
         system("clear");
+}
+
+char *toLower(char *str)
+{
+    for (int i = 0; str[i]; i++)
+    {
+        str[i] = tolower(str[i]);
+    }
+    return str;
 }
